@@ -4,6 +4,11 @@ import { useCart } from "../context/cartContext";
 import Link from "next/link";
 import Image from "next/image";
 
+// Custom loader for external images
+const myLoader = ({ src }) => {
+  return src; // returns the original URL
+};
+
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
 
@@ -29,10 +34,11 @@ export default function ProductCard({ product }) {
         >
           {product.images?.[0] && (
             <Image
+              loader={myLoader} // ✅ Use custom loader
               src={product.images[0]}
               alt={product.title}
-              width={400} // adjust as needed
-              height={180} // adjust as needed
+              width={400} // adjust width
+              height={180} // adjust height
               style={{ objectFit: "cover", borderRadius: "6px" }}
             />
           )}
