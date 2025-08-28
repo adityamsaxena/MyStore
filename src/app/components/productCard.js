@@ -2,6 +2,7 @@
 
 import { useCart } from "../context/cartContext";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
@@ -26,16 +27,15 @@ export default function ProductCard({ product }) {
           href={`/products/${product.id}`}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <img
-            src={product.images[0]}
-            alt={product.title}
-            style={{
-              width: "100%",
-              height: "180px",
-              objectFit: "cover",
-              borderRadius: "6px",
-            }}
-          />
+          {product.images?.[0] && (
+            <Image
+              src={product.images[0]}
+              alt={product.title}
+              width={400} // adjust as needed
+              height={180} // adjust as needed
+              style={{ objectFit: "cover", borderRadius: "6px" }}
+            />
+          )}
           <h2
             style={{
               fontSize: "1.1rem",

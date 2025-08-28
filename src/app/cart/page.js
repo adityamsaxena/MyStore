@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "../context/cartContext";
+import Image from "next/image";
 
 export default function CartPage() {
   const {
@@ -31,17 +32,16 @@ export default function CartPage() {
               <div className="card-body d-flex justify-content-between align-items-center">
                 {/* Product Info */}
                 <div className="d-flex align-items-center">
-                  <img
-                    src={item.images[0]}
-                    alt={item.title}
-                    className="rounded me-3"
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <div>
+                  {item.images?.[0] && (
+                    <Image
+                      src={item.images[0]}
+                      alt={item.title}
+                      width={70}
+                      height={70}
+                      style={{ objectFit: "cover", borderRadius: "8px" }}
+                    />
+                  )}
+                  <div className="ms-3">
                     <h5 className="mb-1">{item.title}</h5>
                     <p className="mb-2 text-muted">
                       Price: <strong>${item.price}</strong>

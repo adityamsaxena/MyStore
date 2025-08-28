@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useCart } from "@/app/context/cartContext";
 
@@ -26,12 +27,15 @@ export default function ProductDetails() {
       <div className="row">
         {/* Product Image */}
         <div className="col-md-6 d-flex justify-content-center align-items-center">
-          <img
-            src={product.images?.[0]}
-            alt={product.title}
-            className="img-fluid rounded shadow"
-            style={{ maxHeight: "400px", objectFit: "cover" }}
-          />
+          {product.images?.[0] && (
+            <Image
+              src={product.images[0]}
+              alt={product.title}
+              width={400} // adjust width
+              height={400} // adjust height
+              style={{ objectFit: "cover", borderRadius: "8px" }}
+            />
+          )}
         </div>
 
         {/* Product Info */}

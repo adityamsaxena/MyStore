@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
@@ -68,6 +69,7 @@ export default function Home() {
       <div className="container mt-5">
         <h2 className="text-center mb-4">Featured Categories</h2>
         <div className="row g-4">
+          {/* Electronics */}
           <div className="col-md-4">
             <div
               style={{
@@ -78,19 +80,18 @@ export default function Home() {
                 padding: "20px",
               }}
             >
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80"
                 alt="Electronics"
-                style={{
-                  width: "100%",
-                  borderRadius: "6px",
-                  height: "200px",
-                  objectFit: "cover",
-                }}
+                width={400}
+                height={200}
+                style={{ borderRadius: "6px", objectFit: "cover" }}
               />
               <h4 className="mt-3">Electronics</h4>
             </div>
           </div>
+
+          {/* Fashion */}
           <div className="col-md-4">
             <div
               style={{
@@ -101,19 +102,18 @@ export default function Home() {
                 padding: "20px",
               }}
             >
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80"
                 alt="Fashion"
-                style={{
-                  width: "100%",
-                  borderRadius: "6px",
-                  height: "200px",
-                  objectFit: "cover",
-                }}
+                width={400}
+                height={200}
+                style={{ borderRadius: "6px", objectFit: "cover" }}
               />
               <h4 className="mt-3">Fashion</h4>
             </div>
           </div>
+
+          {/* Home & Living */}
           <div className="col-md-4">
             <div
               style={{
@@ -124,15 +124,12 @@ export default function Home() {
                 padding: "20px",
               }}
             >
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=600&q=80"
-                alt="Home"
-                style={{
-                  width: "100%",
-                  borderRadius: "6px",
-                  height: "200px",
-                  objectFit: "cover",
-                }}
+                alt="Home & Living"
+                width={400}
+                height={200}
+                style={{ borderRadius: "6px", objectFit: "cover" }}
               />
               <h4 className="mt-3">Home & Living</h4>
             </div>
@@ -156,15 +153,12 @@ export default function Home() {
                   height: "100%",
                 }}
               >
-                <img
+                <Image
                   src={product.images[0]}
                   alt={product.title}
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    objectFit: "cover",
-                    borderRadius: "6px",
-                  }}
+                  width={300}
+                  height={180}
+                  style={{ borderRadius: "6px", objectFit: "cover" }}
                 />
                 <h5 className="mt-3">{product.title}</h5>
                 <p className="text-muted">${product.price}</p>
@@ -197,8 +191,8 @@ export default function Home() {
           textAlign: "center",
         }}
       >
-        <h2>Don't Miss Out!</h2>
-        <p>Grab your favorite products before they’re gone.</p>
+        <h2>{"Don't Miss Out!"}</h2>
+        <p>{"Grab your favorite products before they’re gone."}</p>
         <Link
           href="/products"
           style={{
