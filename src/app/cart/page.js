@@ -1,8 +1,10 @@
 "use client";
 import { useCart } from "../context/cartContext";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+  const router = useRouter();
   const {
     cart,
     removeFromCart,
@@ -12,6 +14,13 @@ export default function CartPage() {
   } = useCart();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleCheckout = () => {
+    // Save cart to localStorage
+    localStorage.setItem("cartForPayment", JSON.stringify(cart));
+    // Navigate to /payment
+    router.push("/payment");
+  };
 
   if (cart.length === 0) {
     return (
@@ -52,7 +61,7 @@ export default function CartPage() {
                       <button
                         className="btn btn-outline-secondary btn-sm"
                         onClick={() => decreaseQuantity(item.id)}
-                        disabled={item.quantity === 1} // 🔴 Disable when qty=1
+                        disabled={item.quantity === 1}
                       >
                         -
                       </button>
@@ -86,14 +95,16 @@ export default function CartPage() {
         ))}
       </div>
 
-      {/* Total & Clear Cart */}
+      {/* Total & Checkout */}
       <div className="d-flex justify-content-between align-items-center mt-4 p-3 border rounded shadow-sm">
         <h4 className="mb-0">Total: ${total.toFixed(2)}</h4>
         <div className="d-flex gap-2">
           <button onClick={clearCart} className="btn btn-dark">
             Clear Cart
           </button>
-          <button className="btn btn-success">Proceed to Checkout</button>
+          <button onClick={handleCheckout} className="btn btn-success">
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>
