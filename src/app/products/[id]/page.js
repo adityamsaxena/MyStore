@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useCart } from "@/app/context/cartContext";
 
 export default function ProductDetails() {
   const { id } = useParams(); // get product id from route params
   const [product, setProduct] = useState(null);
   const { addToCart } = useCart();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -21,6 +22,10 @@ export default function ProductDetails() {
   }, [id]);
 
   if (!product) return <h2 className="text-center mt-5">Loading...</h2>;
+
+  const handleBuyNow = () => {
+    router.push("/payment");
+  };
 
   return (
     <div className="container mt-5">
@@ -55,7 +60,10 @@ export default function ProductDetails() {
             >
               Add to Cart 🛒
             </button>
-            <button className="btn btn-outline-secondary px-4 py-2">
+            <button
+              onClick={handleBuyNow}
+              className="btn btn-outline-secondary px-4 py-2"
+            >
               Buy Now ⚡
             </button>
             <Link href="/products" className="btn btn-dark px-4 py-2">

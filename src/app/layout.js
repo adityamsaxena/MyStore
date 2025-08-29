@@ -1,3 +1,4 @@
+import ChatWidget from "./components/chatWidget";
 import Navbar from "./components/navBar";
 import { CartProvider } from "./context/cartContext";
 // import "./globals.css";
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
             style={{ paddingTop: "70px" }}
           >
             {children}
+            <ChatWidget />
           </main>
         </CartProvider>
       </body>
