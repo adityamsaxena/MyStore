@@ -5,9 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Custom loader for external images
-const myLoader = ({ src }) => {
-  return src; // returns the original URL
-};
+const myLoader = ({ src }) => src;
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
@@ -15,14 +13,11 @@ export default function ProductCard({ product }) {
   return (
     <div className="col-md-4 col-sm-6 mb-4">
       <div
+        className="d-flex flex-column h-100 p-3"
         style={{
           border: "1px solid #e5e7eb",
           borderRadius: "10px",
-          padding: "16px",
           backgroundColor: "#fff",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           transition: "all 0.2s ease",
         }}
@@ -31,16 +26,20 @@ export default function ProductCard({ product }) {
         <Link
           href={`/products/${product.id}`}
           style={{ textDecoration: "none", color: "inherit" }}
+          className="mb-3"
         >
           {product.images?.[0] && (
-            <Image
-              loader={myLoader} // ✅ Use custom loader
-              src={product.images[0]}
-              alt={product.title}
-              width={400} // adjust width
-              height={180} // adjust height
-              style={{ objectFit: "cover", borderRadius: "6px" }}
-            />
+            <div
+              style={{ width: "100%", height: "200px", position: "relative" }}
+            >
+              <Image
+                loader={myLoader}
+                src={product.images[0]}
+                alt={product.title}
+                fill
+                style={{ objectFit: "cover", borderRadius: "6px" }}
+              />
+            </div>
           )}
           <h2
             style={{
@@ -64,35 +63,17 @@ export default function ProductCard({ product }) {
           ${product.price}
         </p>
 
-        <div style={{ display: "flex", gap: "10px", marginTop: "auto" }}>
+        <div className="d-flex gap-2 mt-auto">
           <button
             onClick={() => addToCart(product)}
-            style={{
-              flex: 1,
-              backgroundColor: "#2563eb",
-              color: "white",
-              padding: "10px 14px",
-              borderRadius: "6px",
-              border: "none",
-              fontWeight: "600",
-              cursor: "pointer",
-            }}
+            className="flex-grow-1 btn btn-primary"
           >
             Add to Cart
           </button>
 
           <Link
             href={`/products/${product.id}`}
-            style={{
-              flex: 1,
-              backgroundColor: "#10b981",
-              color: "white",
-              padding: "10px 14px",
-              borderRadius: "6px",
-              textAlign: "center",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
+            className="flex-grow-1 btn btn-success text-center"
           >
             View
           </Link>
